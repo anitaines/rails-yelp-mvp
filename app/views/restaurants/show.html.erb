@@ -1,0 +1,44 @@
+<h1 class="text-bg-light p-3 text-center"><%= @restaurant.name %></h1>
+
+<div class="d-flex justify-content-around">
+  
+  <div class="card flex-grow-1 m-3" style="width: 18rem;">
+  <div class="card-body">
+    <p class="card-text">Address: <%= @restaurant.address %></p>
+    <p class="card-text">Phone: <%= @restaurant.phone_number %></p>
+    <p class="card-text">Category: <%= @restaurant.category %></p>
+  </div>
+    <ul class="list-group list-group-flush">
+      <% @restaurant.reviews.each do |review| %>
+        <li class="list-group-item">
+          Rating: <%= review.rating %>
+          <br>
+          <%= review.content %>
+        </li>
+      <% end %>
+    </ul>
+
+    <%# <div class="card-body"> %>
+      <%# <%= link_to "Add review", new_restaurant_review_path(@restaurant), class: "btn btn-outline-danger me-2" %> 
+    <%# </div> %>
+
+  </div>
+
+  <div class="flex-grow-1 m-3">
+    <h2 class="text-bg-light p-1 text-center">Add Review</h2>
+
+    <%= simple_form_for [@restaurant, @review] do |f| %>
+
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+      <%= f.input :rating %>
+      <%= f.input :content %>
+
+      <%= f.button :submit, class: "btn btn-warning" %>
+
+    <% end %>
+  </div>
+
+</div>
+

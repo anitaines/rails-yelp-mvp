@@ -1,0 +1,15 @@
+<h1 class="text-bg-light p-3 text-center">Create new restaurant</h1>
+
+<%= simple_form_for(@restaurant) do |f| %>
+
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :phone_number %>
+  <%= f.input :category, collection: Restaurant::CATEGORIES  %>
+
+  <%= f.button :submit, class: "btn btn-warning" %>
+
+<% end %>
